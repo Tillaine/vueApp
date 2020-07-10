@@ -1,2 +1,2 @@
 # vueApp
-Product Page
+Simple Product page demonstrating the use of Vue components. 
