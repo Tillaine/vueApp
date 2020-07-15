@@ -96,3 +96,7 @@ body {
       color: rgba(174, 50, 50, 0.906);
       font-size: .75em;
   }
+
+  .noStock {
+    text-decoration: line-through;
+  }

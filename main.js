@@ -9,6 +9,7 @@ const app = new Vue({
         inventory: 100, 
         onSale: false, 
         inStock: true,
+        noStockClass: 'noStock',
         details: ['Strong Adhesive', '3 inch X 3 inch', '6 Pack'], 
         variants: [
             {
