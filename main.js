@@ -2,7 +2,12 @@
 
 
 Vue.component('product', {
-    
+    props: {
+        premium: {
+            type: Boolean,
+            required: true
+        }
+    },
     template: `
     <div class="product">
     <div class="product-image">
@@ -15,6 +20,7 @@ Vue.component('product', {
     <p v-if="inStock > 10">In Stock</p>
     <p v-else-if="inStock <= 10 && inStock > 0">Almost Sold Out</p>
     <p v-else>Out of Stock</p>
+    <p>Shipping: {{ shipping }}</p>
     <ul>
     <li v-for="detail in details" >{{ detail }}</li>
     </ul>
@@ -79,6 +85,9 @@ Vue.component('product', {
         },
         updateProduct(index) {
             this.selectedVariant = index;
+        },
+        shipping() {
+            return this.premium ? 'Free' : '$5.89';
         }
     }, 
     computed: {
@@ -101,7 +110,10 @@ Vue.component('product', {
     });
     
 const app = new Vue({
-    el: '#app'
+    el: '#app', 
+    data: {
+        premium: true
+    }
 })
                                                                                                                                                                                                                                                         
 const description = new Vue({
