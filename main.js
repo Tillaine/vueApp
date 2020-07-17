@@ -20,7 +20,7 @@ Vue.component('product', {
     <p v-if="inStock > 10">In Stock</p>
     <p v-else-if="inStock <= 10 && inStock > 0">Almost Sold Out</p>
     <p v-else>Out of Stock</p>
-    <p>Shipping: {{ shipping }}</p>
+    <p v-if='premium'>Free Premium Shipping</p>
     <ul>
     <li v-for="detail in details" >{{ detail }}</li>
     </ul>
@@ -112,7 +112,7 @@ Vue.component('product', {
 const app = new Vue({
     el: '#app', 
     data: {
-        premium: true
+        premium: false
     }
 })
                                                                                                                                                                                                                                                         
