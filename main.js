@@ -33,17 +33,14 @@ Vue.component('product', {
     <div class="onSale">
     <p v-show="onSale">{{onSale}}</p>
     </div>
-    <button 
-    v-on:click="addToCart"
-    :disabled="!inStock"
-    :class="{ disabledButton: !inStock }">
-    Add to Cart
-    </button>
     <p class='delete' @click="removeItem">Remove Item</p>
     
-    <div class="cart">
-    <p>Cart({{cart}})</p>
-    </div>
+    <button 
+        v-on:click="addToCart"
+        :disabled="!inStock"
+        :class="{ disabledButton: !inStock }">
+        Add to Cart
+    </button>
     
     </div>
     <a :href="orgLink">Colorado Gives</a>
@@ -73,15 +70,14 @@ Vue.component('product', {
                     image: 'https://i.imgur.com/nD3xMgQ.png'
                 }
             ],
-            cart: 0
         }
     },
     methods: {
         addToCart () {
-            this.cart ++;
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantID)
         }, 
         removeItem() {
-            if (this.cart) { this.cart -- }
+            this.$emit('remove-item', this.variants[this.selectedVariant].variantID)
         },
         updateProduct(index) {
             this.selectedVariant = index;
@@ -112,7 +108,19 @@ Vue.component('product', {
 const app = new Vue({
     el: '#app', 
     data: {
-        premium: false
+        premium: false,
+        cart: []
+    }, 
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        }, 
+        removeItem(id) {
+            const itemIndex = this.cart.indexOf(id);
+            if (itemIndex > -1) {
+                this.cart.splice(itemIndex, 1)
+            }
+        }
     }
 })
                                                                                                                                                                                                                                                         
