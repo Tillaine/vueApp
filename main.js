@@ -1,5 +1,55 @@
 
+Vue.component("product-review", {
+    template: `
+    <form class="review-form" @submit.prevent="onSubmit">
+        <p>
+            <lable for="name">Name:</lable>
+            <input id="name" v-model="name">
+        </p>
 
+        <p>
+            <lable for="review">Review:</lable>
+            <textarea id="review" v-model="review"></textarea>
+        </p>
+        
+        <p>
+            <lable for="rating">Rating:</lable>
+            <select id="rating" v-model="rating">
+                <option>5</option>
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+            </select>
+        </p>
+
+        <p>
+            <input type='submit' value='Submit'>
+        </p>
+
+    </form>
+    `,
+    data() {
+        return {
+            name: null,
+            review: null,
+            rating: null
+        }
+    }, 
+    methods: {
+        onSubmit() {
+            let productReview = {
+                name: this.name,
+                review: this.review,
+                rating: this.rating
+            }
+            this.$emit('review-submitted', productReview)
+            this.name = null; 
+            this.rating = null;
+            this.review = null;
+        }
+    }
+})
 
 Vue.component('product', {
     props: {
@@ -41,7 +91,9 @@ Vue.component('product', {
         :class="{ disabledButton: !inStock }">
         Add to Cart
     </button>
-    
+    <div>
+        <product-review @review-submitted="addReview"></product-review>
+    </div>
     </div>
     <a :href="orgLink">Colorado Gives</a>
     </div>
@@ -53,6 +105,7 @@ Vue.component('product', {
             selectedVariant: 0,
             orgLink: "https://www.coloradogives.org/COGIVESDAY",
             noStockClass: 'noStock',
+            reviews: [],
             details: ['Strong Adhesive', '3 inch X 3 inch', '6 Pack'], 
             variants: [
                 {
@@ -84,6 +137,9 @@ Vue.component('product', {
         },
         shipping() {
             return this.premium ? 'Free' : '$5.89';
+        },
+        addReview(productReview) {
+            this.reviews.push(productReview)
         }
     }, 
     computed: {
@@ -130,3 +186,4 @@ const description = new Vue({
     description: "Support Colorado Gives Day"
     }
     })
+
