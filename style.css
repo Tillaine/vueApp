@@ -64,7 +64,8 @@ body {
     width: 400px;
     padding: 20px;
     margin: 40px;
-    border: 1px solid #d8d8d8;
+    border: 1px solid #16C0B0;
+    border-radius: 10%;
   }
   
   input {
@@ -99,4 +100,17 @@ body {
 
   .noStock {
     text-decoration: line-through;
+  }
+
+  .review{
+    line-height: 2px;
+    font-size: medium;
+    list-style-type: none;
+    border-bottom: .7px solid lightcyan;
+    border-radius: 30%;
+  }
+  
+  .name{
+    color: #16C0B0;
+    font-weight: 700;
   }
