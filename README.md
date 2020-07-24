@@ -1,5 +1,5 @@
 # vueApp
-## Frontend 
+## Frontend Product Page  
 Dynamic Product page demonstrating the use of Vue components. 
 
 
